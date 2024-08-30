@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Sweat Today</title>
+
+  <!-- Icon -->
+  <!-- Cambiare Icona-->
+  <link rel="icon" href="images/icon.png" sizes="192x192">
+
+  <!-- Font  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Stile -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <div class="container">
+
+
+    <!-- Intestazione -->
+    <header class="panel">
+      <h1>Workout Schedule</h1>
+      <img src="/images/logo.svg" alt="Logo Sweat Today">
+    </header>
+
+    <!-- Sezione principale -->
+    <main>
+      <p class="empty-list-message"></p>
+      <!-- Lista attività -->
+      <ul class="todo-list">
+        
+      </ul>
+
+      <!-- pannello aggiunta attività -->
+      <div class="panel add-todo">
+
+        <div class="dropdown">
+          <input type="text" placeholder="Serie" class="dropdown-serie" id="serie-drop">
+            <div id="dropdown-s" class="dropdown-content">
+            </div>
+        </div>
+
+        <div class="dropdown">
+          <input type="text" placeholder="Rep"  class="dropdown-ripetizioni" id="rep-drop" >
+            <div id="dropdown-r" class="dropdown-content">
+            </div>
+        </div>
+
+        <div class="dropdown">
+          <input type="text" placeholder="Peso(KG)"  class="dropdown-peso" id="peso-drop">
+            <div id="myDropdown" class="dropdown-content">
+            </div>
+        </div>
+
+        <input type="text" class="input-esercizio" placeholder="Nome Esercizio" id="input-ese" >
+        <button class="button-note">
+          <img src="images/add.svg" alt="plus icon">
+        </button>
+      </div>
+      <!-- pannello funzionalità -->
+      <div class="panel add-todo">
+        <button class="button-delete" id="delete">
+          <p>Elimina Esercizi</p>
+        </button>
+        
+        <button class="button-function" onclick="setPreset()" id="preset">
+          <p>Preset Esercizi</p>
+        </button>
+        
+        <button class="button-function" onclick="savePreset()" id="s-preset">
+          <p>Salva Preset</p>
+        </button>
+        <button class="button-function" id="d-preset" onclick="deletePreset()">
+          <p>Elimina Preset</p>
+        </button>
+      </div>
+      <div class="made-by">
+        <h8>Made by SmashBrain89 💪</h8>
+      </div>
+      
+         
+
+        
+        
+      
+
+      
+
+    </main>
+  </div>
+  <!-- Va messo qui se bisogna modificare html stesso -->
+  <script src="script.js">
+
+  </script>
+</body>
+
+</html>

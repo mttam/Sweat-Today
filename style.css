@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Utilities */
+.container {
+    margin: 0 auto;
+    max-width: 90%;
+    width: 540px;
+}
+
+/* Generiche */
+body {
+    padding: 1rem;
+    font-family: Inter, sans-serif;
+    background-color: #4789C7;
+    font-size: 16px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+h1 {
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+}
+
+.made-by {
+    max-width: 100%;
+    text-align: center;
+}
+
+/* Pannello */
+.panel {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #162635;
+}
+
+.panel img {
+    max-width: 25%;
+    max-height: 25%;
+    width: auto;
+    height: auto;
+}
+
+.button-note img {
+	max-width: 75%;
+    max-height: 75%;
+    width: auto;
+    height: auto;
+}
+
+/* Elementi del modulo aggiungi attività */
+.add-todo {
+    display: flex;
+    gap: 0.2rem;
+    margin-top: 0.5rem;
+}
+
+input, .input-esercizio {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    flex-grow: 1;
+}
+
+.button-note, .button-delete, .button-function,
+.dropdown-peso, .dropdown-serie, .dropdown-ripetizioni, 
+.button-serie, .button-ripetizioni {
+    cursor: pointer;
+    padding: 0.5rem;
+    border: none;
+    font-family: Inter, sans-serif;
+    border-radius: 0.5rem;
+    background-color: #E68745;
+    font-size: 0.875rem;
+}
+
+ .dropdown-serie, .dropdown-ripetizioni {
+    width: 50px;
+    min-width: 50px;
+    height: auto;
+}
+
+.dropdown-peso{
+	width:100px;
+    height: auto;
+}
+
+
+/* Messaggio di lista vuota */
+.empty-list-message {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: rgb(255, 255, 255);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #162635;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    background-color: rgb(255, 255, 255);
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+}
+
+.todo-text {
+    padding: 0.5rem;
+    flex-grow: 1;
+    word-break: break-word;
+}
+
+.todo-check, .todo-modify, .todo-save {
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: #E68745;
+}
+
+.todo-check {
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.todo-save {
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* Media Queries per responsive */
+@media screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .add-todo {
+		flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .dropdown-peso, .dropdown-serie, .dropdown-ripetizioni {
+        width: 100%;
+        margin-top: 0.3rem;
+    }
+
+	.dropdown-preset{
+		width: 100%;
+	}
+
+	
+    .todo-item {
+        flex-wrap:wrap;
+    }
+
+    .todo-text {
+        width: 100%;
+        order: -1;
+    }
+
+    .todo-check, .todo-modify, .todo-save {
+        flex: 1;
+        text-align: center;
+    }
+}
