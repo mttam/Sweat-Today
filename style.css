@@ -67,7 +67,7 @@ h1 {
     margin-top: 0.5rem;
 }
 
-input, .input-esercizio {
+input, .input-esercizio , .input-dialog {
     font-size: 0.875rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
@@ -77,7 +77,7 @@ input, .input-esercizio {
 
 .button-note, .button-delete, .button-function,
 .dropdown-peso, .dropdown-serie, .dropdown-ripetizioni, 
-.button-serie, .button-ripetizioni {
+.button-serie, .button-ripetizioni ,.cancel-btn,.select-btn,.ok-btn,.save-btn{
     cursor: pointer;
     padding: 0.5rem;
     border: none;
@@ -138,6 +138,65 @@ input, .input-esercizio {
 .todo-save {
     border-radius: 0 0.5rem 0.5rem 0;
 }
+
+
+.todo-save:hover,.todo-modify:hover {
+    background-color:  #162635;
+  }
+
+
+
+
+
+.preset-dialog {
+    background-color: #162635;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+  }
+  
+  .preset-dialog h2 {
+    margin-top: 0;
+    font-family: Inter, sans-serif;
+    color: rgb(255, 255, 255);
+  }
+  
+  .preset-list {
+    list-style-type: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    font-family: Inter, sans-serif;
+    color: rgb(255, 255, 255);
+  }
+  
+  .preset-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .preset-list li:hover {
+    background-color: #E68745;
+  }
+  .preset-list li.selected {
+    background-color: #E68745;
+  }
+  
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  
+  .dialog-actions button {
+    margin-left: 8px;
+  }
+
+  
+
+
 
 /* Media Queries per responsive */
 @media screen and (max-width: 600px) {

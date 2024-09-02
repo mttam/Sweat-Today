@@ -70,9 +70,6 @@ button.addEventListener('click',function(){
    addActivity();
 });
 
-buttonDelete.addEventListener('click',function(){
-    deleteExercise();
-});
 
 
 //  Funzione che decide cosa mostrare in pagina
@@ -246,68 +243,12 @@ function resetInputBox(){
 
 //funzione per eliminare tutti gli esercizi si da localstorage che dalla UI
 function deleteExercise(){
-
-    if(window.confirm("Vuoi davvero procedere con l'eliminazione degli esercizi?'")){
             localStorage.removeItem(STORAGE_KEY);
             activities=[];
             showContent();
-    }
 
 };
 
-//funzione per elimiare i preset
-function deletePreset(){
-        var message="Quale Preset vuoi cancellare (Inserisci il nome)?\n"
-        var totPreset=preset.length;
-        if(preset.length>0){
-            preset.forEach(function(esecizio){message+=esecizio.id + "\n";})
-            let anw=window.prompt(message);
-            if( anw ){
-                if(anw!=' '){
-                        preset.forEach(function(data,index){
-                            if(data.id==anw){
-                                //rimuovi l'elemento se lo trovo
-                                preset.splice(index,1);
-                                //aggiorna local storage
-                                localStorage.setItem(STORAGE_KEY_PRESET,JSON.stringify(preset));
-                                showContent();
-                            }
-                        })
-                        if(preset.length==totPreset){window.alert("Qualcosa è andato storto durante l'eliminazione")}
-                };
-           };       
-
-}else{
-    window.alert('Non ci sono preset!');
-}
-
-};
-//funzione per aggiungere gli esercizi di preset
-function setPreset(){
-    var message="Quale Preset vuoi inserire (Inserisci il nome)?\n"
-    var totActivities=activities.length;
-    if(preset.length>0){
-        preset.forEach(function(esecizio){message+=esecizio.id + "\n";})
-        let anw=window.prompt(message);
-        if( anw ){
-            if(anw!=' '){
-                    preset.forEach(function(data,index){
-                        if(data.id==anw){
-                            //aggiungo gli esercizi
-                            addPreset(anw)
-                            //aggiorna local storage
-                            localStorage.setItem(STORAGE_KEY_PRESET,JSON.stringify(preset));
-                            showContent();
-                        }
-                    })
-                    if(activities.length==totActivities){window.alert("Qualcosa è andato storto durante l'inserimento")}
-            };
-       };       
-
-}else{
-window.alert('Non ci sono preset!');
-}
-};
 
 
 // funzione per caricare gli id dei preset per il dropmenu button
@@ -318,11 +259,12 @@ function loadPreset(){
 };
 
 // funzione per salvare il preset da un nome da input
-function savePreset(){
-    nameP=window.prompt("come vuoi chiamare il preset?");
-    if(activities.length>0 && nameP ){
+async function savePreset(){
+    let message = "come vuoi chiamare il preset?";
+    if(activities.length>0 ){
         // inserisco in pagina un blocco HTML che dico io:
-        if(nameP!=' '){
+        nameP = await showSavePresetDialog(message)
+        if(nameP){
             let raw_preset = {id:nameP,esercizi:[]};
             activities.forEach(function(activity){
                 raw_preset.esercizi.push(activity);
@@ -333,5 +275,202 @@ function savePreset(){
     };
 };
 
+// Funzione per eliminare i preset
+async function deletePreset() {
+    let message = "Quale Preset vuoi cancellare?";
+    if (preset.length > 0) {
+      let presetNames = preset.map((data) => data.id);
+      let selectedPreset = await showPresetDialog(message, presetNames);
+      if (selectedPreset) {
+        let index = preset.findIndex((data) => data.id === selectedPreset);
+        if (index !== -1) {
+          preset.splice(index, 1);
+          localStorage.setItem(STORAGE_KEY_PRESET, JSON.stringify(preset));
+          showContent();
+        } else {
+          alert("Qualcosa è andato storto durante l'eliminazione");
+        }
+      }
+    } else {
+      alert('Non ci sono preset!');
+    }
+  }
+  
+  // Funzione per aggiungere gli esercizi di un preset
+  async function setPreset() {
+    let message = "Quale Preset vuoi inserire?";
+    if (preset.length > 0) {
+      let presetNames = preset.map((data) => data.id);
+      let selectedPreset = await showPresetDialog(message, presetNames);
+      if (selectedPreset) {
+        addPreset(selectedPreset);
+        localStorage.setItem(STORAGE_KEY_PRESET, JSON.stringify(preset));
+        showContent();
+      }
+    } else {
+      alert('Non ci sono preset!');
+    }
+  }
+
+  //funzione per eliminare tutti gli esercizi
+  async function deleteAllExrcise() {
+    let message = "Vuoi eliminare tutti gli esercizi?";
+    if (activities.length > 0){
+        let decision = await showDeleteExDialog(message);
+        if (decision){
+            deleteExercise();
+        }
+
+    }
+    
+  }
+  
+  // Funzione per mostrare un dialog di selezione del preset
+    async function showPresetDialog(message, options) {
+        return new Promise((resolve) => {
+        const dialog = document.createElement('dialog');
+        dialog.classList.add('preset-dialog');
+        dialog.innerHTML = `
+            
+            <div class="dialog-content">
+            <h2>${message}</h2>
+            <ul class="preset-list"></ul>
+            <div class="dialog-actions">
+                <button class="cancel-btn">Annulla</button>
+                <button class="select-btn">Seleziona</button>
+            </div>
+            </div>
+        `;
+    
+        const presetList = dialog.querySelector('.preset-list');
+        options.forEach((option) => {
+            const li = document.createElement('li');
+            li.textContent = option;
+            li.addEventListener('click', () => {
+            selectedOption = option;
+            presetList.querySelectorAll('li').forEach((li) => li.classList.remove('selected'));
+            li.classList.add('selected');
+            });
+            presetList.appendChild(li);
+        });
+    
+        const cancelBtn = dialog.querySelector('.cancel-btn');
+        const selectBtn = dialog.querySelector('.select-btn');
+    
+        cancelBtn.addEventListener('click', () => {
+            dialog.close();
+            resolve(null);
+        });
+    
+        selectBtn.addEventListener('click', () => {
+            if (selectedOption) {
+            dialog.close();
+            resolve(selectedOption);
+            }
+        });
+    
+        document.body.appendChild(dialog);
+    
+        // Centro il dialog
+        dialog.style.position = 'fixed';
+        dialog.style.top = '50%';
+        dialog.style.left = '50%';
+        dialog.style.transform = 'translate(-50%, -50%)';
+    
+        dialog.showModal();
+        });
+    }
 
 
+
+    // Funzione che mostra un dialog per scegliere l'eliminazione di tutti gli esercizi
+    async function showDeleteExDialog(message) {
+        return new Promise((resolve) => {
+        const dialog = document.createElement('dialog');
+        dialog.classList.add('preset-dialog');
+        dialog.innerHTML = `
+            
+            <div class="dialog-content">
+            <h2>${message}</h2>
+            <div class="dialog-actions">
+                <button class="cancel-btn">Annulla</button>
+                <button class="ok-btn">OK</button>
+            </div>
+            </div>
+        `;
+     
+        const cancelBtn = dialog.querySelector('.cancel-btn');
+        const okBtn = dialog.querySelector('.ok-btn');
+    
+        cancelBtn.addEventListener('click', () => {
+            dialog.close();
+            resolve(null);
+        });
+    
+        okBtn.addEventListener('click', () => { 
+            dialog.close();
+            resolve(true);
+            
+        });
+    
+        document.body.appendChild(dialog);
+    
+        // Centro il dialog
+        dialog.style.position = 'fixed';
+        dialog.style.top = '50%';
+        dialog.style.left = '50%';
+        dialog.style.transform = 'translate(-50%, -50%)';
+    
+        dialog.showModal();
+        });
+    }
+
+
+    async function showSavePresetDialog(message) {
+        return new Promise((resolve) => {
+          const dialog = document.createElement('dialog');
+          dialog.classList.add('preset-dialog');
+      
+          dialog.innerHTML = `
+            <div class="dialog-content">
+              <h2>${message}</h2>
+              <input type="text" id="preset-name-input" placeholder="Nome preset">
+              <div class="dialog-actions">
+                <button class="cancel-btn" id="cancel-btn">Annulla</button>
+                <button class="save-btn" id="save-btn">Salva</button>
+              </div>
+            </div>
+          `;
+      
+          document.body.appendChild(dialog);
+      
+          dialog.style.position = 'fixed';
+          dialog.style.top = '50%';
+          dialog.style.left = '50%';
+          dialog.style.transform = 'translate(-50%, -50%)';
+      
+          dialog.showModal();
+      
+          const cancelBtn = dialog.querySelector('#cancel-btn');
+          const saveBtn = dialog.querySelector('#save-btn');
+          const inputField = dialog.querySelector('#preset-name-input');
+      
+          cancelBtn.addEventListener('click', () => {
+            dialog.close();
+            resolve(null);
+          });
+      
+          saveBtn.addEventListener('click', () => {
+            const inputValue = inputField.value;
+            const trimmedValue = inputValue.trim();
+            
+            if (trimmedValue !== '') {
+              dialog.close();
+              resolve(trimmedValue);
+            } else {
+              console.log('Input vuoto'); // Debug
+              alert('Per favore, inserisci un nome per il preset');
+            }
+          });
+        });
+      }
