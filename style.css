@@ -14,6 +14,21 @@
     width: 540px;
 }
 
+@keyframes jelly {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}
 /* Generiche */
 body {
     padding: 1rem;
@@ -36,7 +51,17 @@ h1 {
 
 .made-by {
     max-width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.made-by a {
+  text-decoration: none;
+  padding: .5em;
+  color: #162635;
+}
+.made-by:hover{
+  animation: jelly .5s;
 }
 
 /* Pannello */
@@ -46,11 +71,40 @@ h1 {
     background-color: #162635;
 }
 
-.panel img {
+
+.logo  {
     max-width: 25%;
     max-height: 25%;
     width: auto;
     height: auto;
+}
+
+.review{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review a {
+  display: flex;
+  justify-content: center;
+  padding: .5em;
+  opacity: .5;
+  transition: opacity .25s
+}
+
+.review a svg{
+  max-width: 15%;
+  max-height: 15%;
+  width: auto;
+  height: auto;
+  margin: 0 .5em;
+  fill:  #162635
+}
+
+.review a:hover{
+  opacity: 1;
+  animation: jelly .5s;
 }
 
 .button-note img {
@@ -75,9 +129,10 @@ input, .input-esercizio , .input-dialog {
     flex-grow: 1;
 }
 
+
 .button-note, .button-delete, .button-function,
 .dropdown-peso, .dropdown-serie, .dropdown-ripetizioni, 
-.button-serie, .button-ripetizioni ,.cancel-btn,.select-btn,.ok-btn,.save-btn{
+.button-serie, .button-ripetizioni ,.cancel-btn,.select-btn,.ok-btn,.save-btn,.send-btn{
     cursor: pointer;
     padding: 0.5rem;
     border: none;
@@ -85,6 +140,11 @@ input, .input-esercizio , .input-dialog {
     border-radius: 0.5rem;
     background-color: #E68745;
     font-size: 0.875rem;
+}
+.button-note:hover, .button-delete:hover, .button-function:hover,
+.dropdown-peso:hover, .dropdown-serie:hover, .dropdown-ripetizioni:hover, 
+.button-serie:hover, .button-ripetizioni:hover{
+    animation: jelly .5s;
 }
 
  .dropdown-serie, .dropdown-ripetizioni {
@@ -129,6 +189,7 @@ input, .input-esercizio , .input-dialog {
     cursor: pointer;
     padding: 0.5rem;
     background-color: #E68745;
+  
 }
 
 .todo-check {
@@ -140,15 +201,15 @@ input, .input-esercizio , .input-dialog {
 }
 
 
-.todo-save:hover,.todo-modify:hover {
-    background-color:  #162635;
+.todo-save:hover,.todo-modify:hover ,.todo-check:hover{
+    animation:jelly .5s
   }
 
+  
 
 
-
-
-.preset-dialog {
+/*Dialog */
+.preset-dialog{
     background-color: #162635;
     border-radius: 8px;
     padding: 20px;
@@ -170,6 +231,7 @@ input, .input-esercizio , .input-dialog {
     font-family: Inter, sans-serif;
     color: rgb(255, 255, 255);
   }
+
   
   .preset-list li {
     padding: 8px 12px;
@@ -194,8 +256,90 @@ input, .input-esercizio , .input-dialog {
     margin-left: 8px;
   }
 
+  .dialog-actions-exip {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
   
+  .dialog-actions button {
+    margin-left: 4px;
+  }
 
+
+/* Dialog Chat*/
+  .chat-dialog {
+    background-color: #162635;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+  }
+  
+  .chat-dialog h2 {
+    margin-top: 0;
+    font-family: Inter, sans-serif;
+    color: rgb(255, 255, 255);
+  }
+  
+  .chat-log {
+    /* Style for chat messages */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .chat-log p {
+    margin: 5px 0;
+    color: #fff;
+  }
+  
+  #chat-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .dialog-actions button {
+    margin-left: 8px;
+    background-color: #E68745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .dialog-actions-exip button {
+    margin-left: 4px;
+    background-color: #E68745;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .dialog-actions button:hover {
+    animation: jelly .5s;
+  }
+  
+  .dialog-actions-exip button:hover {
+    animation: jelly .5s;
+  }
+  /* Style for chat message from user */
+  .chat-log p:nth-child(even) {
+    text-align: right;
+  }
+  
+  /* Style for chat message from bot */
+  .chat-log p:nth-child(odd) {
+    text-align: left;
+  }
+  
 
 
 /* Media Queries per responsive */

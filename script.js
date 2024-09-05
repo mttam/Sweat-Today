@@ -20,6 +20,8 @@ let dropdown_preset=document.getElementById('dropdown-pre');
 const STORAGE_KEY= '__bool__to__do';
 const STORAGE_KEY_PRESET='__preset__';
 
+
+
 // preparo lista attività
 let activities = [];
 
@@ -324,6 +326,25 @@ async function deletePreset() {
     }
     
   }
+  // Funzione per esportare o importare esercizi/preset
+  async function exportImport() {
+    let message = "Sezione Import/Export"
+    if (activities.length > 0 ){
+        let exportImportDecision = await showDialogImpExp(message);
+        if (exportImportDecision==="exEs"){
+            console.log("X.X")
+        }
+        else if(exportImportDecision==="exPr"){
+            console.log("X.Y")
+        }
+        else if(exportImportDecision==="imEs"){
+            console.log("Y.X")
+        }
+        else if(exportImportDecision==="imPr"){
+            console.log("Y.Y")
+        }
+    }
+}
   
   // Funzione per mostrare un dialog di selezione del preset
     async function showPresetDialog(message, options) {
@@ -425,7 +446,7 @@ async function deletePreset() {
         });
     }
 
-
+    // funzione che mostra un dialog per dare un nome hai nuovi preset 
     async function showSavePresetDialog(message) {
         return new Promise((resolve) => {
           const dialog = document.createElement('dialog');
@@ -467,10 +488,52 @@ async function deletePreset() {
             if (trimmedValue !== '') {
               dialog.close();
               resolve(trimmedValue);
-            } else {
-              console.log('Input vuoto'); // Debug
-              alert('Per favore, inserisci un nome per il preset');
             }
           });
         });
       }
+
+
+      
+
+      async function showDialogImpExp(message) {
+        return new Promise((resolve) => {
+            const dialog = document.createElement('dialog');
+          dialog.classList.add('preset-dialog');
+      
+          dialog.innerHTML = `
+            <div class="dialog-content">
+              <h2>${message}</h2>
+              <div class="dialog-actions-exip">
+                <button class="select-btn" id="exEs-btn">Esporta Esercizi</button>
+                <button class="select-btn" id="exPr-btn">Esporta Preset</button>
+                <button class="select-btn" id="imEs-btn">Importa Esercizi</button>
+                <button class="select-btn" id="imPr-btn">Importa Preset</button>
+              </div>
+              <div class="dialog-actions">
+                <button class="cancel-btn" id="cancel-btn">Annulla</button>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(dialog);
+      
+          dialog.style.position = 'fixed';
+          dialog.style.top = '50%';
+          dialog.style.left = '50%';
+          dialog.style.transform = 'translate(-50%, -50%)';
+
+          const cancelBtn = dialog.querySelector('#cancel-btn');
+      
+          dialog.showModal();
+
+          cancelBtn.addEventListener('click', () => {
+            dialog.close();
+            resolve(null);
+          });
+      
+
+      }
+    )}
+
+
+    
