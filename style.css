@@ -339,6 +339,23 @@ input, .input-esercizio , .input-dialog {
   .chat-log p:nth-child(odd) {
     text-align: left;
   }
+
+
+  .success-message {
+    position: fixed;
+    top: 10%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    background-color: #34C759; 
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none; 
+  }
+  
+  .success-message.show {
+    display: block; 
+  }
   
 
 
@@ -379,5 +396,11 @@ input, .input-esercizio , .input-dialog {
     .todo-check, .todo-modify, .todo-save {
         flex: 1;
         text-align: center;
+    }
+
+    .success-message {
+      position: fixed;
+      top: 50%;
+      left: 50%
     }
 }
