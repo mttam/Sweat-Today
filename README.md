@@ -4,7 +4,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/mttam/Sweat-Today)](https://github.com/mttam/Sweat-Today/commits/main)
 [![GitHub issues](https://img.shields.io/github/issues/mttam/Sweat-Today)](https://github.com/mttam/Sweat-Today/issues)
 
-
+<img src="https://github.com/mttam/Sweat-Today/main/logo.svg" >
 ## Overview
 
 Sweat-Today is a web application designed to help users track and manage their workout schedules and exercises. It's built using HTML, CSS, and JavaScript, with a focus on simplicity and ease of use.
@@ -54,7 +54,7 @@ The ID with value N represents the exercises available locally, while those with
     {
       "id": "N",
       "esercizi": [
-        "GRANDE GIOVE",
+        "Serie(4)-Rep(12)-Peso(50)-Squat Bilancere",
         "Serie(4)-Rep(12)-Peso(50)-Leg Press",
         "Serie(4)-Rep(15)-Peso(25)-Leg Extension"
       ]
