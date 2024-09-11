@@ -48,7 +48,7 @@ Sweat-Today is a web application designed to help users track and manage their w
 2. Open the `index.html` file in your preferred web browser.
 
 ## Live Demo
-try the web app at the following link:[Sweat-Today](https://sweat-today.netlify.app/) 
+try the web app at the following link: [Sweat-Today](https://sweat-today.netlify.app/) 
 
 ## Contributing
 
