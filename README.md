@@ -42,7 +42,7 @@ Sweat-Today is a web application designed to help users track and manage their w
 
 ## Data Format import/export
 The ID with value N represents the exercises available locally, while those with their own ID are the presets
-'''example json
+'''json
 {"preset": [
     {
       "id": "Test",
