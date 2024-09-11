@@ -34,14 +34,6 @@ if (storageActivities) {
   activities = ["Serie(4)-Rep(15)-Peso(50)-Lat machine", "Serie(3)-Rep(12)-Peso(50)-Squat", "Serie(3)-Rep(12)-Flessioni"];
 };
 
-// range pesi
-let p = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
-
-
-// serie più comuni
-let s = [1, 2, 3, 4];
-// range ripetizioni più comuni
-let r = [6, 8, 12, 15];
 
 // preset esercizi struct --> {id:asd,esercizi:["1","2","3"]}
 let preset = [];
@@ -103,7 +95,7 @@ function showContent() {
   }
 }
 
-
+// Funzione che serve a verificare che tutti todo-check siano cliccabili
 function makeCheckCliccable() {
   //cerca tutti i check e renderli cliccabili
   const checks = document.querySelectorAll('.todo-check');
@@ -121,6 +113,7 @@ function makeCheckCliccable() {
   });
 };
 
+// Funzione che serve a verificare che tutti todo-modify siano cliccabili
 function makeModifyCliccable() {
   //cerca tutti i check e renderli cliccabili
   const checks = document.querySelectorAll('.todo-modify');
@@ -134,6 +127,7 @@ function makeModifyCliccable() {
   });
 };
 
+// Funzione che serve a verificare che tutti todo-save siano cliccabili
 function makeSaveCliccable() {
   //cerca tutti i check e renderli cliccabili
   const checks = document.querySelectorAll('.todo-save');
@@ -152,7 +146,8 @@ function makeSaveCliccable() {
   });
 };
 
-//aggiungere i dati 
+// Funzione per aggiunger gli esercizi da un preset specifico all'elenco principale di attività
+// Parametro: id - identificatore del preset da cui aggiungere gli esercizi
 function addPreset(id) {
   preset.forEach(function (data) {
     if (data.id == id) {
@@ -165,6 +160,7 @@ function addPreset(id) {
 
 }
 
+// Funzione per aggiungere una nuova attività alla lista
 function addActivity() {
 
   //prendo i valori dalle input box
@@ -222,22 +218,6 @@ function ifNotEmpty(value, type) {
   return type + "(" + value + ")-";
 };
 
-// template per le voci del dropdownmenu
-function createMenuTemplate(value) {
-  return `<a >${value}</a>`;
-};
-
-
-/* Quando l'utente fa clic sul pulsante, alterna tra nascondere e mostrare il contenuto del menu a discesa delle ripetizioni */
-function dropdown_show_p() {
-  let preset_id = loadPreset();
-  if (preset_id.length > 0) {
-    createDropMenu(preset_id, dropdown_preset);
-    dropdown_preset.classList.toggle("show");
-    selectItemButton(button_preset, dropdown_preset);
-  } else { window.alert("Non ci sono preset!") }
-}
-
 //funzione per resettare la UI
 function resetInputBox() {
   peso.value = '';
@@ -276,6 +256,7 @@ async function savePreset() {
       });
       preset.push(raw_preset);
       localStorage.setItem(STORAGE_KEY_PRESET, JSON.stringify(preset));
+      showSuccessMessage();
     }
   };
 };
@@ -500,8 +481,9 @@ async function showSavePresetDialog(message) {
 };
 
 
-
+//funzione che serve ad salavare i dati importati in localr
 function importDataToLocal(key, data) {
+  // importo esercizi per le attività
   if (key == STORAGE_KEY) {
     data.raw_data.preset.forEach(item => {
       if (item.id == "N") {
@@ -514,6 +496,7 @@ function importDataToLocal(key, data) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(activities))
 
   } else {
+    // importo per i preset
     data.raw_data.preset.forEach(item => {
       if (item.id != "N") {
         let raw_preset = { id: item.id, esercizi: item.esercizi };
@@ -528,6 +511,7 @@ function importDataToLocal(key, data) {
 
 };
 
+//Funzione che serve a generare la data odierna
 function getTodayDate() {
   const today = new Date();
   const year = today.getFullYear();
@@ -539,6 +523,7 @@ function getTodayDate() {
   return `${hour}${minutes}${seconds}${day}${month}${year}`;
 };
 
+//Funzione che serve ad esportare i dati locali in formato json
 function exportDataOut(key, fileName) {
   try {
     let data = exportDataBase(key);
@@ -559,6 +544,7 @@ function exportDataOut(key, fileName) {
   }
 };
 
+//Funzione per leggere il file in input
 function readFile(inputFile) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
@@ -572,6 +558,7 @@ function readFile(inputFile) {
   });
 }
 
+// Funzione per parsare il contenuto JSON
 function parseJsonContent(fileContent) {
   try {
     return JSON.parse(fileContent);
@@ -580,6 +567,7 @@ function parseJsonContent(fileContent) {
   }
 }
 
+// Funzione asincrona che serve  ad importare i dati in formato json
 async function importDataBase(operation, inputFile) {
   const file = inputFile;
   const fileName = file.name;
@@ -597,8 +585,9 @@ async function importDataBase(operation, inputFile) {
     return ({ error: error.message });
   }
 }
-
+// funzione che serve a creare il formato  di importazione
 function exportDataBase(key) {
+  // formato esercizi
   if (key == STORAGE_KEY) {
     let data_export =
     {
@@ -606,17 +595,20 @@ function exportDataBase(key) {
     }
     return data_export
 
-  } else {
+  } 
+  // formato preset
+  else {
     let data_export = preset
     return data_export
   }
 }
 
 
-
+// Funzione asincrona che gestisce il dialogo per l'import/export
 async function showDialogImpExp(message) {
 
   return new Promise((resolve) => {
+    // crea l'oggetto dialog
     const dialog = document.createElement('dialog');
     dialog.classList.add('preset-dialog');
 

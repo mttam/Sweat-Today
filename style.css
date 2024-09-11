@@ -14,6 +14,7 @@
     width: 540px;
 }
 
+/* animazione tutto*/
 @keyframes jelly {
   0%,
   100% {
@@ -49,6 +50,7 @@ h1 {
     font-size: 1rem;
 }
 
+/*sezione sul creatore */
 .made-by {
     max-width: 100%;
     display: flex;
@@ -71,7 +73,7 @@ h1 {
     background-color: #162635;
 }
 
-
+/*Loghi*/
 .logo  {
     max-width: 25%;
     max-height: 25%;
@@ -170,6 +172,7 @@ input, .input-esercizio , .input-dialog {
     background-color: #162635;
 }
 
+/*specifiche items todo*/
 .todo-item {
     display: flex;
     align-items: center;
@@ -283,7 +286,6 @@ input, .input-esercizio , .input-dialog {
   }
   
   .chat-log {
-    /* Style for chat messages */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -340,7 +342,7 @@ input, .input-esercizio , .input-dialog {
     text-align: left;
   }
 
-
+  /*Specifiche messaggio di operazione riuscita*/
   .success-message {
     position: fixed;
     top: 10%;
