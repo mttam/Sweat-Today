@@ -91,7 +91,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For any questions or feedback, please contact [mttam](https://github.com/mttam) or visit the [project's GitHub page](https://github.com/mttam/Sweat-Today).
 
-[![GitHub followers](https://img.shields.io/github/followers/mttam?style=social)](https://github.com/mttam)
-[![Twitter Follow](https://img.shields.io/twitter/follow/mttam?style=social)](https://twitter.com/mttam)
 
----
