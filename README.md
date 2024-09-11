@@ -5,7 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/mttam/Sweat-Today)](https://github.com/mttam/Sweat-Today/issues)
 
 
-![logo](logo.svg)
+<img src="logo.svg" alt="logo">
 
 ## Overview
 
