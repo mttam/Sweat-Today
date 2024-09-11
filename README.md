@@ -5,8 +5,8 @@
 [![GitHub issues](https://img.shields.io/github/issues/mttam/Sweat-Today)](https://github.com/mttam/Sweat-Today/issues)
 
 <img src="https://github.com/mttam/Sweat-Today/blob/main/logo.svg" height=200 weight=200>
-## Overview
 
+## Overview
 Sweat-Today is a web application designed to help users track and manage their workout schedules and exercises. It's built using HTML, CSS, and JavaScript, with a focus on simplicity and ease of use.
 
 ## Key Features
