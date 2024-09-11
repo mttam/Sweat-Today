@@ -4,6 +4,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/mttam/Sweat-Today)](https://github.com/mttam/Sweat-Today/commits/main)
 [![GitHub issues](https://img.shields.io/github/issues/mttam/Sweat-Today)](https://github.com/mttam/Sweat-Today/issues)
 
+
 ![Alt Text](logo.svg)
 
 ## Overview
